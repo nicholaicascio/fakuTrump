@@ -8,6 +8,8 @@ public class FollowCam : MonoBehaviour {
     public float smoothSpeed = 0.125f;
     public Vector3 offset;
     public float yClampingRestriction = -1;
+    public float xMinClamp = -1;
+    public float xMaxClamp = -1;
 
 
     float nextTimeToSearch = 0;
@@ -26,7 +28,7 @@ public class FollowCam : MonoBehaviour {
         }
         Vector3 desiredPosition = target.position + offset;
         Vector3 smoothedPosition = Vector3.Lerp(transform.position, desiredPosition, smoothSpeed);
-        smoothedPosition = new Vector3(smoothedPosition.x, Mathf.Clamp(smoothedPosition.y, yClampingRestriction, Mathf.Infinity), smoothedPosition.z);
+        smoothedPosition = new Vector3(Mathf.Clamp(smoothedPosition.x, xMinClamp, xMaxClamp), Mathf.Clamp(smoothedPosition.y, yClampingRestriction, Mathf.Infinity), smoothedPosition.z);
         transform.position = smoothedPosition;
     }
 

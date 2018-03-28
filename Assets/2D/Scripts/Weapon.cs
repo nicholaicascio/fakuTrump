@@ -68,7 +68,7 @@ public class Weapon : MonoBehaviour {
         Instantiate(bulletTrailPrefab, firePoint.position, firePoint.rotation);
         Transform muzzleClone = Instantiate(muzzleFlashPrefab, firePoint.position, firePoint.rotation) as Transform;
         muzzleClone.parent = firePoint;
-        float size = Random.Range(2.5f, 3f);
+        float size = Random.Range(5.5f, 6f);
         muzzleClone.localScale = new Vector3(size, size, size);
         Destroy(muzzleClone.gameObject, 0.05f);
     }
