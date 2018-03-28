@@ -102,6 +102,7 @@ namespace UnityStandardAssets._2D
                 {
                     // ... flip the player.
                     Flip();
+                    
                 }
             }
             // If the player should jump...
