@@ -1,0 +1,386 @@
+fileFormatVersion: 2
+guid: f743462ecabe74b459fc072b31d1138e
+timeCreated: 1522259313
+licenseType: Free
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: playerIdle_0
+    21300002: playerIdle_1
+    21300004: playerIdle_2
+    21300006: playerIdle_3
+    21300008: playerIdle_4
+    21300010: playerIdle_5
+    21300012: playerIdle_6
+    21300014: playerIdle_7
+    21300016: playerIdle_8
+    21300018: playerIdle_9
+    21300020: playerIdle_10
+    21300022: playerIdle_11
+    21300024: playerIdle_12
+    21300026: playerIdle_13
+    21300028: playerIdle_14
+    21300030: playerIdle_15
+    21300032: playerIdle_16
+    21300034: playerIdle_17
+    21300036: playerIdle_18
+    21300038: playerIdle_19
+    21300040: playerIdle_20
+    21300042: playerIdle_21
+    21300044: playerIdle_22
+    21300046: playerIdle_23
+    21300048: playerIdle_24
+    21300050: playerIdle_25
+    21300052: playerIdle_26
+    21300054: playerIdle_27
+    21300056: playerIdle_28
+    21300058: playerIdle_29
+    21300060: playerIdle_30
+    21300062: playerIdle_31
+    21300064: playerIdle_32
+    21300066: playerIdle_33
+    21300068: playerIdle_34
+    21300070: playerIdle_35
+    21300072: playerIdle_36
+    21300074: playerIdle_37
+    21300076: playerIdle_38
+    21300078: playerIdle_39
+    21300080: playerIdle_40
+    21300082: playerIdle_41
+    21300084: playerIdle_42
+    21300086: playerIdle_43
+    21300088: playerIdle_44
+    21300090: playerIdle_45
+    21300092: playerIdle_46
+    21300094: playerIdle_47
+    21300096: playerIdle_48
+    21300098: playerIdle_49
+    21300100: playerIdle_50
+    21300102: playerIdle_51
+    21300104: playerIdle_52
+    21300106: playerIdle_53
+    21300108: playerIdle_54
+    21300110: playerIdle_55
+    21300112: playerIdle_56
+    21300114: playerIdle_57
+    21300116: playerIdle_58
+    21300118: playerIdle_59
+    21300120: playerIdle_60
+    21300122: playerIdle_61
+    21300124: playerIdle_62
+    21300126: playerIdle_63
+    21300128: playerIdle_64
+    21300130: playerIdle_65
+    21300132: playerIdle_66
+    21300134: playerIdle_67
+    21300136: playerIdle_68
+    21300138: playerIdle_69
+    21300140: playerIdle_70
+    21300142: playerIdle_71
+    21300144: playerIdle_72
+    21300146: playerIdle_73
+    21300148: playerIdle_74
+    21300150: playerIdle_75
+    21300152: playerIdle_76
+    21300154: playerIdle_77
+    21300156: playerIdle_78
+    21300158: playerIdle_79
+    21300160: playerIdle_80
+    21300162: playerIdle_81
+    21300164: playerIdle_82
+    21300166: playerIdle_83
+    21300168: playerIdle_84
+    21300170: playerIdle_85
+    21300172: playerIdle_86
+    21300174: playerIdle_87
+    21300176: playerIdle_88
+    21300178: playerIdle_89
+    21300180: playerIdle_90
+    21300182: playerIdle_91
+    21300184: playerIdle_92
+    21300186: playerIdle_93
+    21300188: playerIdle_94
+    21300190: playerIdle_95
+    21300192: playerIdle_96
+    21300194: playerIdle_97
+    21300196: playerIdle_98
+    21300198: playerIdle_99
+    21300200: playerIdle_100
+    21300202: playerIdle_101
+    21300204: playerIdle_102
+    21300206: playerIdle_103
+    21300208: playerIdle_104
+    21300210: playerIdle_105
+    21300212: playerIdle_106
+    21300214: playerIdle_107
+    21300216: playerIdle_108
+    21300218: playerIdle_109
+    21300220: playerIdle_110
+    21300222: playerIdle_111
+    21300224: playerIdle_112
+    21300226: playerIdle_113
+    21300228: playerIdle_114
+    21300230: playerIdle_115
+    21300232: playerIdle_116
+    21300234: playerIdle_117
+    21300236: playerIdle_118
+    21300238: playerIdle_119
+  externalObjects: {}
+  serializedVersion: 4
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: -1
+    aniso: -1
+    mipBias: -1
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  platformSettings:
+  - buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+  - buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+  - buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: playerIdle_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 448
+        height: 448
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: playerIdle_1
+      rect:
+        serializedVersion: 2
+        x: 448
+        y: 0
+        width: 448
+        height: 448
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: playerIdle_2
+      rect:
+        serializedVersion: 2
+        x: 896
+        y: 0
+        width: 448
+        height: 448
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: playerIdle_3
+      rect:
+        serializedVersion: 2
+        x: 1344
+        y: 0
+        width: 448
+        height: 448
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: playerIdle_4
+      rect:
+        serializedVersion: 2
+        x: 1792
+        y: 0
+        width: 448
+        height: 448
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: playerIdle_5
+      rect:
+        serializedVersion: 2
+        x: 2240
+        y: 0
+        width: 448
+        height: 448
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: playerIdle_6
+      rect:
+        serializedVersion: 2
+        x: 2688
+        y: 0
+        width: 448
+        height: 448
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: playerIdle_7
+      rect:
+        serializedVersion: 2
+        x: 3136
+        y: 0
+        width: 448
+        height: 448
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: playerIdle_8
+      rect:
+        serializedVersion: 2
+        x: 3584
+        y: 0
+        width: 448
+        height: 448
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: playerIdle_9
+      rect:
+        serializedVersion: 2
+        x: 4032
+        y: 0
+        width: 448
+        height: 448
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: playerIdle_10
+      rect:
+        serializedVersion: 2
+        x: 4480
+        y: 0
+        width: 448
+        height: 448
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: playerIdle_11
+      rect:
+        serializedVersion: 2
+        x: 4928
+        y: 0
+        width: 448
+        height: 448
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    outline: []
+    physicsShape: []
+  spritePackingTag: 
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
