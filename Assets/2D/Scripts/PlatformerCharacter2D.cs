@@ -23,7 +23,7 @@ namespace UnityStandardAssets._2D
 
         Transform playerGraphics;
 
-        public int jumpDelay = 200;
+        //public int jumpDelay = 200;
         //public IEnumerator jumpUp()
         //{
            // yield return new WaitForSeconds(jumpDelay);
@@ -40,7 +40,7 @@ namespace UnityStandardAssets._2D
             playerGraphics = transform.Find("Graphics");
             if(playerGraphics == null)
             {
-                //Debug.LogError("There is no graphics object as a child of the player");
+                Debug.LogError("There is no graphics object as a child of the player");
             }
         }
 
@@ -66,6 +66,16 @@ namespace UnityStandardAssets._2D
 
         public void Move(float move, bool crouch, bool jump)
         {
+            //if crouching, and pressing jump, go down a level
+            //if (crouch && m_Grounded && jump && m_Anim.GetBool("Ground"))
+            //{
+                //m_Grounded = false;
+                //m_Anim.SetBool("Ground", false);
+                //crouch = false;
+                //jump = true;
+                //m_Rigidbody2D.AddForce(new Vector2(0f, -m_JumpForce));
+            //}
+
             // If crouching, check to see if the character can stand up
             if (!crouch && m_Anim.GetBool("Crouch"))
             {
@@ -75,6 +85,8 @@ namespace UnityStandardAssets._2D
                     crouch = true;
                 }
             }
+
+            
 
             // Set whether or not the character is crouching in the animator
             m_Anim.SetBool("Crouch", crouch);

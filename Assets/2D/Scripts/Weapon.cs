@@ -7,6 +7,8 @@ public class Weapon : MonoBehaviour {
     public float fireRate = 0;
     public float damage = 10;
     public LayerMask toHit;
+    public AudioClip gunShotAudio;
+    public float gunShotVolume = 1.0f;
 
     public Transform bulletTrailPrefab;
     public Transform muzzleFlashPrefab;
@@ -66,6 +68,7 @@ public class Weapon : MonoBehaviour {
     void Effect()
     {
         Instantiate(bulletTrailPrefab, firePoint.position, firePoint.rotation);
+        AudioSource.PlayClipAtPoint(gunShotAudio, new Vector3(firePoint.position.x, firePoint.position.y, firePoint.position.z), gunShotVolume);
         Transform muzzleClone = Instantiate(muzzleFlashPrefab, firePoint.position, firePoint.rotation) as Transform;
         muzzleClone.parent = firePoint;
         float size = Random.Range(5.5f, 6f);
