@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class GameMaster : MonoBehaviour {
     public static GameMaster gm;
-
     private void Start()
     {
         if (gm == null)
@@ -21,10 +20,10 @@ public class GameMaster : MonoBehaviour {
 
     public IEnumerator RespawnPlayer()
     {
-        yield return new WaitForSeconds(spawnDelay);
-        Instantiate(playerPrefab, spawnPoint.position, spawnPoint.rotation);
-        Transform clone = Instantiate(spawnPrefab, spawnPoint.position, spawnPoint.rotation);
-        Destroy(clone.gameObject, spawnParticleTimeOnScreen);
+            yield return new WaitForSeconds(spawnDelay);
+            Instantiate(playerPrefab, spawnPoint.position, spawnPoint.rotation);
+            Transform clone = Instantiate(spawnPrefab, spawnPoint.position, spawnPoint.rotation);
+            Destroy(clone.gameObject, spawnParticleTimeOnScreen);
         //this is where you would add spawn particles or play a sound effect
     }
 

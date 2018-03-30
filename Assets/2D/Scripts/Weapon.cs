@@ -10,6 +10,10 @@ public class Weapon : MonoBehaviour {
     public float accuracy = 1;
     public int ammoCount = 30; //Standard Size Magazine
     public int ammoStash = 90; //90 extra bullets total to start with.
+    public float totalDamage = 0; //For End of Game Stats
+    public float totalHits = 0; //For End of Game Stats
+    public float totalShots = 0; //For End of Game Stats
+    public float overallAccuracy = 0; //For End of Game Stats
     public LayerMask toHit;
 
     public AudioClip gunShotAudio;
@@ -26,12 +30,14 @@ public class Weapon : MonoBehaviour {
     Transform shellPoint;
 
     public Text ammoCountGUI;
+    public Text accuracyGUI;
 
     float rotZ = 0;
 
     private void Awake()
     {
         ammoCountGUI = GameObject.Find("AmmoCountText").GetComponent<Text>();
+        accuracyGUI = GameObject.Find("AccuracyText").GetComponent<Text>();
         firePoint = transform.Find("FirePoint");
         shellPoint = transform.Find("ShellPoint");
         if (firePoint == null)
@@ -48,6 +54,13 @@ public class Weapon : MonoBehaviour {
     void Update()
     {
         ammoCountGUI.text = "Ammo Count: " + ammoCount + " / " + ammoStash;
+        this.overallAccuracy = (this.totalHits / this.totalShots) * 100;
+        accuracyGUI.text = "Accuracy: " + this.overallAccuracy.ToString("#.##") + "%"; //Keep at two decimal places.
+        //This will prevent just a % from showing up if the player has garbage aim.
+        if (this.overallAccuracy == 0)
+        {
+            accuracyGUI.text = "Accuracy: 0%";
+        }
         //Shoot();
         if (fireRate == 0)
         {
@@ -78,6 +91,7 @@ public class Weapon : MonoBehaviour {
             Debug.Log("Out of Ammo.");
             return;
         }
+        this.totalShots++; //Increment total number of shots fired.
         
         //Debug.Log("shoot");
         Vector2 mousePosition = new Vector2(Camera.main.ScreenToWorldPoint(Input.mousePosition).x, Camera.main.ScreenToWorldPoint(Input.mousePosition).y);
@@ -92,10 +106,12 @@ public class Weapon : MonoBehaviour {
         Debug.DrawLine(firePointPosition, (mousePosition-firePointPosition)*100, Color.cyan);
         if (hit.collider != null)
         {
+            this.totalHits++; //Increment total number of hits.
             damage = 40 / hit.distance; //Damage Drop off. 40 Could be replaced with a damage depending on which weapon you are using.
             Debug.DrawLine(firePointPosition, hit.point, Color.red);
             Debug.Log("Trump hit " + hit.collider.name + " and did " + damage + " damage.");
             Enemy enemy = hit.collider.GetComponent<Enemy>();
+            this.totalDamage += this.damage; //Track total damage for end of game stats.
             if (enemy != null)
             {
                 enemy.DamageEnemy(damage);
