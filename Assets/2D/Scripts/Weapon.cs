@@ -7,6 +7,8 @@ public class Weapon : MonoBehaviour {
     public float fireRate = 0;
     public float damage = 10;
     public float accuracy = 1;
+    public int ammoCount = 30; //Standard Size Magazine
+    public int ammoStash = 90; //90 extra bullets total to start with.
     public LayerMask toHit;
 
     public AudioClip gunShotAudio;
@@ -48,17 +50,28 @@ public class Weapon : MonoBehaviour {
                 Shoot();
             }
         }
-        else if (fireRate != 0){
+        else if (fireRate != 0) {
             if (Input.GetButton("Fire1") && Time.time > timeToFire)
             {
-                timeToFire = Time.time + 1/fireRate;
+                timeToFire = Time.time + 1 / fireRate;
                 Shoot();
             }
+        }
+
+        if (Input.GetButtonDown("Fire2"))
+        {
+            Reload();
         }
     }
 
     private void Shoot()
     {
+        if (ammoCount == 0)
+        {
+            Debug.Log("Out of Ammo.");
+            return;
+        }
+
         //Debug.Log("shoot");
         Vector2 mousePosition = new Vector2(Camera.main.ScreenToWorldPoint(Input.mousePosition).x, Camera.main.ScreenToWorldPoint(Input.mousePosition).y);
         Vector2 firePointPosition = new Vector2(firePoint.position.x, firePoint.position.y);
@@ -72,6 +85,7 @@ public class Weapon : MonoBehaviour {
         Debug.DrawLine(firePointPosition, (mousePosition-firePointPosition)*100, Color.cyan);
         if (hit.collider != null)
         {
+            damage = 40 / hit.distance; //Damage Drop off. 40 Could be replaced with a damage depending on which weapon you are using.
             Debug.DrawLine(firePointPosition, hit.point, Color.red);
             Debug.Log("Trump hit " + hit.collider.name + " and did " + damage + " damage.");
             Enemy enemy = hit.collider.GetComponent<Enemy>();
@@ -80,6 +94,9 @@ public class Weapon : MonoBehaviour {
                 enemy.DamageEnemy(damage);
             }
         }
+        ammoCount--; //Decrement Ammo Count
+        Debug.Log("Ammo Count: " + ammoCount);
+        Debug.Log("Ammo Stash: " + ammoStash);
     }
     
     void Effect()
@@ -102,5 +119,29 @@ public class Weapon : MonoBehaviour {
         shellClone.localScale = new Vector3(shellScale, shellScale, shellScale);
         Destroy(shellClone.gameObject, 10f);
         
+    }
+
+    //Returns true if reload was successful.
+    private bool Reload()
+    {
+        if (this.ammoStash > 0 && ammoCount != 31)
+        {
+            if ((this.ammoStash + this.ammoCount) < 30)
+            {
+                this.ammoCount += this.ammoStash;
+                this.ammoStash = 0;
+            }
+            else if (this.ammoCount == 30)
+            {
+                this.ammoCount = 31; //Load one in chamber.
+                this.ammoStash--;
+            }
+            else
+            {
+                this.ammoStash -= (30 - this.ammoCount);
+                this.ammoCount = 30;
+            }
+        }
+        return this.ammoCount > 0;
     }
 }
