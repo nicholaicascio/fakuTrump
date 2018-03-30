@@ -327,6 +327,7 @@ MonoBehaviour:
   playerStats:
     Health: 100
   fallBoundary: -20
+  healthGUI: {fileID: 0}
 --- !u!114 &114460243520809486
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -369,11 +370,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fireRate: 5
-  damage: 10
+  weaponDamage: 40
   accuracy: 1
+  ammoCount: 30
+  ammoStash: 90
+  totalDamage: 0
+  totalHits: 0
+  totalShots: 0
+  overallAccuracy: 0
   toHit:
     serializedVersion: 2
-    m_Bits: 512
+    m_Bits: 4096
   gunShotAudio: {fileID: 8300000, guid: 3ce8a21340341104db367e4a0f424e25, type: 3}
   gunShotVolume: 1
   bulletTrailPrefab: {fileID: 4779083930159362, guid: b63827ec76141b6449af64be8a18c295,
@@ -384,6 +391,8 @@ MonoBehaviour:
     type: 2}
   shellScale: 3
   effectSpawnRate: 10
+  ammoCountGUI: {fileID: 0}
+  accuracyGUI: {fileID: 0}
 --- !u!212 &212461659632005186
 SpriteRenderer:
   m_ObjectHideFlags: 1

@@ -1374,6 +1374,11 @@ Prefab:
       propertyPath: toHit.m_Bits
       value: 4096
       objectReference: {fileID: 0}
+    - target: {fileID: 114921308026620970, guid: 0a4bdd1a927e8e94f9b36e7c9096776a,
+        type: 2}
+      propertyPath: damage
+      value: 40
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 0a4bdd1a927e8e94f9b36e7c9096776a, type: 2}
   m_IsPrefabParent: 0

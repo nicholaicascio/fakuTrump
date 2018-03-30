@@ -9,6 +9,10 @@ public class Player : MonoBehaviour {
 	public class PlayerStats
     {
         public float Health = 100f;
+        public float totalDamage = 0; //For End of Game Stats
+        public float totalHits = 0; //For End of Game Stats
+        public float totalShots = 0; //For End of Game Stats
+        public float overallAccuracy = 0; //For End of Game Stats
     }
 
     public PlayerStats playerStats = new PlayerStats();

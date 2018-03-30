@@ -6,7 +6,8 @@ using UnityEngine.UI;
 public class Weapon : MonoBehaviour {
 
     public float fireRate = 0;
-    public float damage = 10;
+    public float weaponDamage = 40;
+    float damageDealt = 0;
     public float accuracy = 1;
     public int ammoCount = 30; //Standard Size Magazine
     public int ammoStash = 90; //90 extra bullets total to start with.
@@ -107,14 +108,14 @@ public class Weapon : MonoBehaviour {
         if (hit.collider != null)
         {
             this.totalHits++; //Increment total number of hits.
-            damage = 40 / hit.distance; //Damage Drop off. 40 Could be replaced with a damage depending on which weapon you are using.
+            damageDealt = weaponDamage / hit.distance; //Damage Drop off. 40 Could be replaced with a damage depending on which weapon you are using.
             Debug.DrawLine(firePointPosition, hit.point, Color.red);
-            Debug.Log("Trump hit " + hit.collider.name + " and did " + damage + " damage.");
+            Debug.Log("Trump hit " + hit.collider.name + " and did " + damageDealt + " damage.");
             Enemy enemy = hit.collider.GetComponent<Enemy>();
-            this.totalDamage += this.damage; //Track total damage for end of game stats.
+            this.totalDamage += this.damageDealt; //Track total damage for end of game stats.
             if (enemy != null)
             {
-                enemy.DamageEnemy(damage);
+                enemy.DamageEnemy(damageDealt);
             }
         }
         ammoCount--; //Decrement Ammo Count
