@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Player : MonoBehaviour {
 
@@ -12,11 +13,14 @@ public class Player : MonoBehaviour {
 
     public PlayerStats playerStats = new PlayerStats();
     public int fallBoundary = -20;
-
+    public Text healthGUI;
+    
     //public FollowCam followCam = new FollowCam();
 
     private void Update()
     {
+        healthGUI = GameObject.Find("HealthText").GetComponent<Text>();
+        healthGUI.text = "Health: " + playerStats.Health;
         if (transform.position.y <= fallBoundary)
         {
             DamagePlayer(9999);
@@ -28,6 +32,7 @@ public class Player : MonoBehaviour {
         playerStats.Health -= damage;
         if (playerStats.Health <= 0)
         {
+            healthGUI.text = "Health: 0";
             Debug.Log("KILL PLAYER");
             GameMaster.KillPlayer(this);
         }

@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Weapon : MonoBehaviour {
 
@@ -23,11 +24,14 @@ public class Weapon : MonoBehaviour {
     public float effectSpawnRate = 10;
     Transform firePoint;
     Transform shellPoint;
-    
+
+    public Text ammoCountGUI;
+
     float rotZ = 0;
 
     private void Awake()
     {
+        ammoCountGUI = GameObject.Find("AmmoCountText").GetComponent<Text>();
         firePoint = transform.Find("FirePoint");
         shellPoint = transform.Find("ShellPoint");
         if (firePoint == null)
@@ -36,12 +40,14 @@ public class Weapon : MonoBehaviour {
         }
         if (shellPoint == null)
         {
-            Debug.LogError("COuld not find a child named 'ShellPoint'!");
+            Debug.LogError("Could not find a child named 'ShellPoint'!");
         }
+
     }
 
     void Update()
     {
+        ammoCountGUI.text = "Ammo Count: " + ammoCount + " / " + ammoStash;
         //Shoot();
         if (fireRate == 0)
         {
@@ -68,10 +74,11 @@ public class Weapon : MonoBehaviour {
     {
         if (ammoCount == 0)
         {
+            ammoCountGUI.color = Color.red;
             Debug.Log("Out of Ammo.");
             return;
         }
-
+        
         //Debug.Log("shoot");
         Vector2 mousePosition = new Vector2(Camera.main.ScreenToWorldPoint(Input.mousePosition).x, Camera.main.ScreenToWorldPoint(Input.mousePosition).y);
         Vector2 firePointPosition = new Vector2(firePoint.position.x, firePoint.position.y);
@@ -142,6 +149,7 @@ public class Weapon : MonoBehaviour {
                 this.ammoCount = 30;
             }
         }
+        ammoCountGUI.color = Color.black;
         return this.ammoCount > 0;
     }
 }
