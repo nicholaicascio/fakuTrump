@@ -1,5 +1,5 @@
 using System;
-using System.Collections.Generic;
+using System.Collections;
 using UnityEngine;
 
 namespace UnityStandardAssets._2D
@@ -20,6 +20,8 @@ namespace UnityStandardAssets._2D
         private Animator m_Anim;            // Reference to the player's animator component.
         private Rigidbody2D m_Rigidbody2D;
         private bool m_FacingRight = true;  // For determining which way the player is currently facing.
+
+        public float jumpDelay = 1.0f; //the delay before the character's jump happens
 
         Transform playerGraphics;
 
@@ -122,7 +124,7 @@ namespace UnityStandardAssets._2D
                 // Add a vertical force to the player.
                 m_Grounded = false;
                 m_Anim.SetBool("Ground", false);
-                
+                //StartCoroutine(WaitAMoment());
                 m_Rigidbody2D.AddForce(new Vector2(0f, m_JumpForce));
                 //PlatformerCharacter2D pc2d = new PlatformerCharacter2D();
                 //pc2d.StartCoroutine(pc2d.jumpUp());
@@ -132,7 +134,14 @@ namespace UnityStandardAssets._2D
             }
         }
 
-        
+        IEnumerator WaitAMoment()
+        {
+            m_Grounded = false;
+            m_Anim.SetBool("Ground", false);
+            yield return new WaitForSeconds(jumpDelay);
+            m_Rigidbody2D.AddForce(new Vector2(0f, m_JumpForce));
+            yield break;
+        }
 
         private void Flip()
         {

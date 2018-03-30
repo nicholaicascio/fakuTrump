@@ -18,8 +18,8 @@ TagManager:
   - Platforms
   - backgrounds
   - bg-img
-  - 
-  - 
+  - Enemies
+  - ShellFXs
   - 
   - 
   - 
@@ -44,4 +44,7 @@ TagManager:
     locked: 0
   - name: Player
     uniqueID: 3832118421
+    locked: 0
+  - name: Enemies
+    uniqueID: 1348871297
     locked: 0
