@@ -25,7 +25,7 @@ GameObject:
   - component: {fileID: 114967063779722070}
   - component: {fileID: 114468734863252874}
   - component: {fileID: 61644584938737778}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: FollowBox
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -59,12 +59,12 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 2
   m_AngularDrag: 0.05
-  m_GravityScale: 0
+  m_GravityScale: 1
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!61 &61644584938737778
 BoxCollider2D:
   m_ObjectHideFlags: 1
@@ -101,6 +101,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 33d83c9a959655a4f8d00b0e186a7e8e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  stats:
+    Health: 100
 --- !u!114 &114483273783819958
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -140,8 +142,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   target: {fileID: 0}
   updateRate: 2
-  speed: 600
-  fMode: 0
+  speed: 10
+  fMode: 1
   pathIsEnded: 0
   nextWaypointDistance: 3
 --- !u!212 &212110498422494700

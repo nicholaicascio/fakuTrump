@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class GameMaster : MonoBehaviour {
     public static GameMaster gm;
+
     private void Start()
     {
         if (gm == null)

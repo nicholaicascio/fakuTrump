@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using Pathfinding;
 using UnityEngine;
+//using UnityStandardAssets._2D;
 
 [RequireComponent (typeof(Rigidbody2D))]
 [RequireComponent(typeof(Seeker))]
@@ -31,11 +32,15 @@ public class SpearKoreanAI : MonoBehaviour {
 
     private bool searchingForPlayer = false;
 
+    //private PlatformerCharacter2D m_Character;
+
     private void Start()
     {
         seeker = GetComponent<Seeker>();
         rb = GetComponent<Rigidbody2D>();
-
+        
+        //m_Character = GetComponent<PlatformerCharacter2D>();
+        
         if (target == null)
         {
             if (!searchingForPlayer)
@@ -126,6 +131,7 @@ public class SpearKoreanAI : MonoBehaviour {
         //Move the AI
 
         rb.AddForce(dir, fMode);
+        //m_Character.Move(dir, false, false);
         float dist = Vector3.Distance(transform.position, path.vectorPath[currentWaypoint]);
         if (dist < nextWaypointDistance)
         {

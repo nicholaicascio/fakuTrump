@@ -100,7 +100,7 @@ GameObject:
   - component: {fileID: 4964004012794300}
   m_Layer: 8
   m_Name: FirePoint
-  m_TagString: Untagged
+  m_TagString: FirePoint
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -370,8 +370,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fireRate: 5
-  weaponDamage: 40
-  accuracy: 1
+  weaponDamage: 20
+  magazineSize: 30
   ammoCount: 30
   ammoStash: 90
   totalDamage: 0
@@ -383,7 +383,7 @@ MonoBehaviour:
     m_Bits: 4096
   gunShotAudio: {fileID: 8300000, guid: 3ce8a21340341104db367e4a0f424e25, type: 3}
   gunShotVolume: 1
-  bulletTrailPrefab: {fileID: 4779083930159362, guid: b63827ec76141b6449af64be8a18c295,
+  bulletTrailPrefab: {fileID: 4964152527475090, guid: c01f807d2af66b24c9c4419af1e1007b,
     type: 2}
   muzzleFlashPrefab: {fileID: 4241789277739292, guid: 28692c81d6d168b4fba87ff95036ecdd,
     type: 2}

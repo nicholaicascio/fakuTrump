@@ -68,15 +68,6 @@ namespace UnityStandardAssets._2D
 
         public void Move(float move, bool crouch, bool jump)
         {
-            //if crouching, and pressing jump, go down a level
-            //if (crouch && m_Grounded && jump && m_Anim.GetBool("Ground"))
-            //{
-                //m_Grounded = false;
-                //m_Anim.SetBool("Ground", false);
-                //crouch = false;
-                //jump = true;
-                //m_Rigidbody2D.AddForce(new Vector2(0f, -m_JumpForce));
-            //}
 
             // If crouching, check to see if the character can stand up
             if (!crouch && m_Anim.GetBool("Crouch"))

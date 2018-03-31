@@ -7,14 +7,18 @@ public class Weapon : MonoBehaviour {
 
     public float fireRate = 0;
     public float weaponDamage = 40;
-    float damageDealt = 0;
+    public int magazineSize = 30; //the number of bullets a magazine can theoretically hold. 30 is a standard size on civilian rifles
+    //float damageDealt = 0;
     //public float weaponAccuracy = 1;
-    public int ammoCount = 30; //Standard Size Magazine
+    //private float accuracyMin = 0;
+    //private float accuracyMax = 0;
+
+    public int ammoCount = 30; //holds number of bullets in magazine at any given time
     public int ammoStash = 90; //90 extra bullets total to start with.
-    public float totalDamage = 0; //For End of Game Stats
-    public float totalHits = 0; //For End of Game Stats
-    public float totalShots = 0; //For End of Game Stats
-    public float overallAccuracy = 0; //For End of Game Stats
+    //public float totalDamage = 0; //For End of Game Stats
+    //public float totalHits = 0; //For End of Game Stats
+    //public float totalShots = 0; //For End of Game Stats
+    //public float overallAccuracy = 0; //For End of Game Stats
     public LayerMask toHit;
 
     public AudioClip gunShotAudio;
@@ -31,9 +35,15 @@ public class Weapon : MonoBehaviour {
     Transform shellPoint;
 
     public Text ammoCountGUI;
-    public Text accuracyGUI;
+    //public Text accuracyGUI;
 
     float rotZ = 0;
+
+    private void Start()
+    {
+        //accuracyMin -= weaponAccuracy;
+        //accuracyMax += weaponAccuracy;
+    }
 
     private void Awake()
     {
@@ -93,10 +103,18 @@ public class Weapon : MonoBehaviour {
             return;
         }
         GameMaster.updateTotalShots(1);
+        GameMaster.updateAccuracy();
         //Debug.Log("shoot");
+
+        //this line here might solve the "bullet spray" problem. instead of taking accurate mouse position, you can add numbers to it's x and y
+        //float numberX = (Camera.main.ScreenToWorldPoint(Input.mousePosition).x + 10);
+
         Vector2 mousePosition = new Vector2(Camera.main.ScreenToWorldPoint(Input.mousePosition).x, Camera.main.ScreenToWorldPoint(Input.mousePosition).y);
         Vector2 firePointPosition = new Vector2(firePoint.position.x, firePoint.position.y);
+        //Vector2 randVect = new Vector2((Random.Range(-10, 10)), (Random.Range(-10, 10)));
         RaycastHit2D hit = Physics2D.Raycast(firePointPosition, mousePosition - firePointPosition, 100, toHit);
+        //RaycastHit2D swag = Physics2D.Raycast()
+        
         if (Time.time >= timeToSpawnEffect)
         {
             Effect();
@@ -106,32 +124,36 @@ public class Weapon : MonoBehaviour {
         Debug.DrawLine(firePointPosition, (mousePosition-firePointPosition)*100, Color.cyan);
         if (hit.collider != null)
         {
-            GameMaster.updateTotalHits(1);
+            //GameMaster.updateTotalHits(1);
             //this.totalHits++; //Increment total number of hits.
-            damageDealt = weaponDamage / hit.distance; //Damage Drop off. 40 Could be replaced with a damage depending on which weapon you are using.
+            //damageDealt = weaponDamage / hit.distance; //Damage Drop off. 40 Could be replaced with a damage depending on which weapon you are using.
             Debug.DrawLine(firePointPosition, hit.point, Color.red);
-            Debug.Log("Trump hit " + hit.collider.name + " and did " + damageDealt + " damage.");
-            Enemy enemy = hit.collider.GetComponent<Enemy>();
-            GameMaster.updateTotalDamage(damageDealt);
+            //Debug.Log("Trump hit " + hit.collider.name + " and did " + damageDealt + " damage.");
+            //Enemy enemy = hit.collider.GetComponent<Enemy>();
+            //GameMaster.updateTotalDamage(damageDealt);
             //this.totalDamage += this.damageDealt; //Track total damage for end of game stats.
             
-            if (enemy != null)
-            {
-                enemy.DamageEnemy(damageDealt);
-            }
+            //if (enemy != null)
+            //{
+                //enemy.DamageEnemy(damageDealt);
+            //}
         }
-        GameMaster.updateAccuracy();
+        //GameMaster.updateAccuracy();
         ammoCount--; //Decrement Ammo Count
         ammoCountGUI.text = "Ammo Count: " + ammoCount + " / " + ammoStash;
-        Debug.Log("Ammo Count: " + ammoCount);
-        Debug.Log("Ammo Stash: " + ammoStash);
+        //Debug.Log("Ammo Count: " + ammoCount);
+        //Debug.Log("Ammo Stash: " + ammoStash);
     }
     
     void Effect()
     {
-        //Quaternion rot = Quaternion.Euler(Random.Range(-10.0f, 10.0f), Random.Range(-10.0f, 10.0f), 0);
-        Instantiate(bulletTrailPrefab, firePoint.position, firePoint.rotation);
+        //Quaternion rot = Quaternion.Euler(Random.Range(-25.0f, 25.0f), Random.Range(-25.0f, 25.0f), 0);
+        Transform bullet = Instantiate(bulletTrailPrefab, firePoint.position, firePoint.rotation);
+        MoveTrail trail = bullet.GetComponent<MoveTrail>();
+        trail.setDamage(weaponDamage);
+
         //bulletTrailPrefab.rotation *= rot;
+
         AudioSource.PlayClipAtPoint(gunShotAudio, new Vector3(firePoint.position.x, firePoint.position.y, firePoint.position.z), gunShotVolume);
 
         Transform muzzleClone = Instantiate(muzzleFlashPrefab, firePoint.position, firePoint.rotation) as Transform;
@@ -152,22 +174,22 @@ public class Weapon : MonoBehaviour {
     //Returns true if reload was successful.
     private bool Reload()
     {
-        if (this.ammoStash > 0 && ammoCount != 31)
+        if (this.ammoStash > 0 && ammoCount != (magazineSize+1))
         {
-            if ((this.ammoStash + this.ammoCount) < 30)
+            if ((this.ammoStash + this.ammoCount) < magazineSize)
             {
                 this.ammoCount += this.ammoStash;
                 this.ammoStash = 0;
             }
-            else if (this.ammoCount == 30)
+            else if (this.ammoCount == magazineSize)
             {
-                this.ammoCount = 31; //Load one in chamber.
+                this.ammoCount = (magazineSize+1); //Load one in chamber.
                 this.ammoStash--;
             }
             else
             {
-                this.ammoStash -= (30 - this.ammoCount);
-                this.ammoCount = 30;
+                this.ammoStash -= (magazineSize - this.ammoCount);
+                this.ammoCount = magazineSize;
             }
         }
         ammoCountGUI.color = Color.black;

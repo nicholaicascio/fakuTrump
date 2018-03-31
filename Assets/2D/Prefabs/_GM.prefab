@@ -20,10 +20,26 @@ GameObject:
   m_Component:
   - component: {fileID: 4617976265614986}
   - component: {fileID: 114703163367369330}
+  - component: {fileID: 114105195289890174}
   m_Layer: 0
   m_Name: _GM
-  m_TagString: Untagged
+  m_TagString: GM
   m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &1405969009057370
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4821492359534516}
+  m_Layer: 0
+  m_Name: SpawnPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: -1412012063857583412, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -34,12 +50,43 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1325131489891516}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -3.1914406, y: 0.8082217, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 4821492359534516}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &4821492359534516
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1405969009057370}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 3.1914406, y: -0.8082217, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4617976265614986}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &114105195289890174
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1325131489891516}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b3466cd96f5b1d4283aab5e121ee3fc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  backgrounds:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  smoothing: 3
 --- !u!114 &114703163367369330
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -51,3 +98,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9817a3927d8b95c479d928670f082558, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerPrefab: {fileID: 4608674950434810, guid: 0a4bdd1a927e8e94f9b36e7c9096776a,
+    type: 2}
+  spawnPoint: {fileID: 4821492359534516}
+  spawnPrefab: {fileID: 4585505981750998, guid: a424cdac0c1f2504cb1356d65fadf074,
+    type: 2}
+  spawnDelay: 2
+  spawnParticleTimeOnScreen: 3
+  totalDamage: 0
+  totalHits: 0
+  totalShots: 0
+  overallAccuracy: 0
+  totalKills: 0
+  totalDeaths: 0
+  accuracyGUI: {fileID: 0}
