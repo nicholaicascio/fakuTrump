@@ -8,7 +8,7 @@ public class Weapon : MonoBehaviour {
     public float fireRate = 0;
     public float weaponDamage = 40;
     float damageDealt = 0;
-    public float accuracy = 1;
+    //public float weaponAccuracy = 1;
     public int ammoCount = 30; //Standard Size Magazine
     public int ammoStash = 90; //90 extra bullets total to start with.
     public float totalDamage = 0; //For End of Game Stats
@@ -38,7 +38,12 @@ public class Weapon : MonoBehaviour {
     private void Awake()
     {
         ammoCountGUI = GameObject.Find("AmmoCountText").GetComponent<Text>();
-        accuracyGUI = GameObject.Find("AccuracyText").GetComponent<Text>();
+        if (!ammoCountGUI)
+            {
+                Debug.LogError("Could not find a child named 'AmmoCountText'!");
+            }
+        ammoCountGUI.color = Color.black;
+        ammoCountGUI.text = "Ammo Count: " + ammoCount + " / " + ammoStash;
         firePoint = transform.Find("FirePoint");
         shellPoint = transform.Find("ShellPoint");
         if (firePoint == null)
@@ -54,14 +59,8 @@ public class Weapon : MonoBehaviour {
 
     void Update()
     {
-        ammoCountGUI.text = "Ammo Count: " + ammoCount + " / " + ammoStash;
-        this.overallAccuracy = (this.totalHits / this.totalShots) * 100;
-        accuracyGUI.text = "Accuracy: " + this.overallAccuracy.ToString("#.##") + "%"; //Keep at two decimal places.
-        //This will prevent just a % from showing up if the player has garbage aim.
-        if (this.overallAccuracy == 0)
-        {
-            accuracyGUI.text = "Accuracy: 0%";
-        }
+        
+        
         //Shoot();
         if (fireRate == 0)
         {
@@ -86,14 +85,14 @@ public class Weapon : MonoBehaviour {
 
     private void Shoot()
     {
+        
         if (ammoCount == 0)
         {
             ammoCountGUI.color = Color.red;
             Debug.Log("Out of Ammo.");
             return;
         }
-        this.totalShots++; //Increment total number of shots fired.
-        
+        GameMaster.updateTotalShots(1);
         //Debug.Log("shoot");
         Vector2 mousePosition = new Vector2(Camera.main.ScreenToWorldPoint(Input.mousePosition).x, Camera.main.ScreenToWorldPoint(Input.mousePosition).y);
         Vector2 firePointPosition = new Vector2(firePoint.position.x, firePoint.position.y);
@@ -107,18 +106,23 @@ public class Weapon : MonoBehaviour {
         Debug.DrawLine(firePointPosition, (mousePosition-firePointPosition)*100, Color.cyan);
         if (hit.collider != null)
         {
-            this.totalHits++; //Increment total number of hits.
+            GameMaster.updateTotalHits(1);
+            //this.totalHits++; //Increment total number of hits.
             damageDealt = weaponDamage / hit.distance; //Damage Drop off. 40 Could be replaced with a damage depending on which weapon you are using.
             Debug.DrawLine(firePointPosition, hit.point, Color.red);
             Debug.Log("Trump hit " + hit.collider.name + " and did " + damageDealt + " damage.");
             Enemy enemy = hit.collider.GetComponent<Enemy>();
-            this.totalDamage += this.damageDealt; //Track total damage for end of game stats.
+            GameMaster.updateTotalDamage(damageDealt);
+            //this.totalDamage += this.damageDealt; //Track total damage for end of game stats.
+            
             if (enemy != null)
             {
                 enemy.DamageEnemy(damageDealt);
             }
         }
+        GameMaster.updateAccuracy();
         ammoCount--; //Decrement Ammo Count
+        ammoCountGUI.text = "Ammo Count: " + ammoCount + " / " + ammoStash;
         Debug.Log("Ammo Count: " + ammoCount);
         Debug.Log("Ammo Stash: " + ammoStash);
     }
@@ -167,6 +171,7 @@ public class Weapon : MonoBehaviour {
             }
         }
         ammoCountGUI.color = Color.black;
+        ammoCountGUI.text = "Ammo Count: " + ammoCount + " / " + ammoStash;
         return this.ammoCount > 0;
     }
 }

@@ -19,6 +19,7 @@ public class Enemy : MonoBehaviour {
         if (stats.Health <= 0)
         {
             Debug.Log("KILL ENEMY");
+            GameMaster.updateTotalKills(1);
             GameMaster.KillEnemy(this);
         }
     }

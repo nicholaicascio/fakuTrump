@@ -9,10 +9,7 @@ public class Player : MonoBehaviour {
 	public class PlayerStats
     {
         public float Health = 100f;
-        public float totalDamage = 0; //For End of Game Stats
-        public float totalHits = 0; //For End of Game Stats
-        public float totalShots = 0; //For End of Game Stats
-        public float overallAccuracy = 0; //For End of Game Stats
+
     }
 
     public PlayerStats playerStats = new PlayerStats();
@@ -38,6 +35,7 @@ public class Player : MonoBehaviour {
         {
             healthGUI.text = "Health: 0";
             Debug.Log("KILL PLAYER");
+            GameMaster.updateTotalDeaths(1);
             GameMaster.KillPlayer(this);
         }
     }
