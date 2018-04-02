@@ -70,6 +70,7 @@ public class GameMaster : MonoBehaviour {
         collider.enabled = false;
         Rigidbody2D body = enemy.GetComponent<Rigidbody2D>();
         body.gravityScale = 0;
+        body.drag = 5;
         //Destroy(enemy.gameObject);
     }
 

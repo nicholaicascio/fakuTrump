@@ -370,7 +370,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fireRate: 5
-  weaponDamage: 100
+  weaponDamage: 200
   magazineSize: 30
   ammoCount: 30
   ammoStash: 90
