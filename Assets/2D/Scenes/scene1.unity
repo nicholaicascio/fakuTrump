@@ -1348,7 +1348,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4608674950434810, guid: 0a4bdd1a927e8e94f9b36e7c9096776a, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 0.8082217
+      value: -1.5
       objectReference: {fileID: 0}
     - target: {fileID: 4608674950434810, guid: 0a4bdd1a927e8e94f9b36e7c9096776a, type: 2}
       propertyPath: m_LocalPosition.z
@@ -1373,11 +1373,6 @@ Prefab:
     - target: {fileID: 4608674950434810, guid: 0a4bdd1a927e8e94f9b36e7c9096776a, type: 2}
       propertyPath: m_RootOrder
       value: 7
-      objectReference: {fileID: 0}
-    - target: {fileID: 114921308026620970, guid: 0a4bdd1a927e8e94f9b36e7c9096776a,
-        type: 2}
-      propertyPath: weaponDamage
-      value: 40
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 0a4bdd1a927e8e94f9b36e7c9096776a, type: 2}

@@ -21,6 +21,7 @@ public class SpearKoreanAI : MonoBehaviour {
 
     //the AI's speed per second
     public float speed = 300f;
+    public float proximityRequiredToChase = 20;
     public ForceMode2D fMode;
     [HideInInspector]
     public bool pathIsEnded = false;
@@ -32,15 +33,20 @@ public class SpearKoreanAI : MonoBehaviour {
 
     private bool searchingForPlayer = false;
 
+    private Vector2 myLocation;
+    private Vector2 targetLocation;
+    private GameObject huntedPerson;
     //private PlatformerCharacter2D m_Character;
 
     private void Start()
     {
+
         seeker = GetComponent<Seeker>();
         rb = GetComponent<Rigidbody2D>();
-        
+        //StartCoroutine(SearchForPlayer());
+        huntedPerson = GameObject.FindGameObjectWithTag("Player");
         //m_Character = GetComponent<PlatformerCharacter2D>();
-        
+
         if (target == null)
         {
             if (!searchingForPlayer)
@@ -58,6 +64,7 @@ public class SpearKoreanAI : MonoBehaviour {
     IEnumerator SearchForPlayer()
     {
         GameObject sResult = GameObject.FindGameObjectWithTag("Player");
+        huntedPerson = GameObject.FindGameObjectWithTag("Player");
         if (sResult == null)
         {
             yield return new WaitForSeconds(1.0f);
@@ -65,7 +72,7 @@ public class SpearKoreanAI : MonoBehaviour {
         }
         else
         {
-            target = sResult.transform;
+            target = sResult.transform;            
             searchingForPlayer = false;
             StartCoroutine(UpdatePath());
             yield break;
@@ -128,9 +135,20 @@ public class SpearKoreanAI : MonoBehaviour {
         Vector3 dir = (path.vectorPath[currentWaypoint] - transform.position).normalized;
         dir *= speed * Time.fixedDeltaTime;
 
-        //Move the AI
+        //decide if player is "close enough" to chase
+        //fpLocation = new Vector2(fp.transform.position.x, fp.transform.localPosition.y);
+        myLocation = new Vector2(transform.localPosition.x, transform.localPosition.y);
+        targetLocation = new Vector2(huntedPerson.transform.localPosition.x, huntedPerson.transform.localPosition.y);
+        float distanceBetween = Vector2.Distance(myLocation, targetLocation);
+        //Debug.Log(distanceBetween.ToString());
 
-        rb.AddForce(dir, fMode);
+        //Move the AI
+        if (distanceBetween <= proximityRequiredToChase)
+        {
+            //Debug.Log("Player within range, attacc!");
+            rb.AddForce(dir, fMode);
+        }
+        
         //m_Character.Move(dir, false, false);
         float dist = Vector3.Distance(transform.position, path.vectorPath[currentWaypoint]);
         if (dist < nextWaypointDistance)
