@@ -29,6 +29,8 @@ public class GameMaster : MonoBehaviour {
     public float totalKills = 0; //for End of Game Stats
     public float totalDeaths = 0; //for End of Game Stats
 
+    
+
     public Text accuracyGUI;
     private void Awake()
     {
@@ -53,10 +55,22 @@ public class GameMaster : MonoBehaviour {
         Destroy(player.gameObject);
         gm.StartCoroutine(gm.RespawnPlayer());
     }
-
+    
     public static void KillEnemy(Enemy enemy)
     {
-        Destroy(enemy.gameObject);
+        Animator enemyAnimator = new Animator();
+        //SpriteRenderer enemyRenderer = new SpriteRenderer();
+        //enemyRenderer = enemy.GetComponent<SpriteRenderer>();
+        enemyAnimator = enemy.GetComponent<Animator>();
+        //Transform renderer = enemyRenderer.transform;
+        enemyAnimator.SetBool("isDead", true);
+        SpearKoreanAI spearKorean = enemy.GetComponent<SpearKoreanAI>();
+        spearKorean.setDead();
+        BoxCollider2D collider = enemy.GetComponent<BoxCollider2D>();
+        collider.enabled = false;
+        Rigidbody2D body = enemy.GetComponent<Rigidbody2D>();
+        body.gravityScale = 0;
+        //Destroy(enemy.gameObject);
     }
 
     public static void updateAccuracy()

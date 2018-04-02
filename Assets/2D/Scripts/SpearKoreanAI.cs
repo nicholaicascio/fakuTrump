@@ -25,7 +25,7 @@ public class SpearKoreanAI : MonoBehaviour {
     public ForceMode2D fMode;
     [HideInInspector]
     public bool pathIsEnded = false;
-
+    public bool isDead = false;
     //the max distance from the AI to a waypoint for it to move
     public float nextWaypointDistance = 3;
     //the waypoint we are currently going toward
@@ -37,11 +37,13 @@ public class SpearKoreanAI : MonoBehaviour {
     private Vector2 targetLocation;
     private GameObject huntedPerson;
     private Animator animator;
+    //private Enemy enemy;
     //Transform graphics;
     //private PlatformerCharacter2D m_Character;
 
     private void Start()
     {
+        //enemy = new Enemy();
         //graphics = transform.Find("Graphics");
         seeker = GetComponent<Seeker>();
         rb = GetComponent<Rigidbody2D>();
@@ -109,62 +111,72 @@ public class SpearKoreanAI : MonoBehaviour {
         }
     }
 
+    public void setDead()
+    {
+        isDead = true;
+        return;
+    }
+
     private void FixedUpdate()
     {
-        if (target == null)
+        if (!isDead)
         {
-            if (!searchingForPlayer)
+            if (target == null)
             {
-                searchingForPlayer = true;
-                StartCoroutine(SearchForPlayer());
-            }
-            return;
-        }
-
-        //TODO: always look at player
-
-        if (path == null) return;
-
-        if (currentWaypoint >= path.vectorPath.Count)
-        {
-            if (pathIsEnded)
+                if (!searchingForPlayer)
+                {
+                    searchingForPlayer = true;
+                    StartCoroutine(SearchForPlayer());
+                }
                 return;
-            //Debug.Log("End of path reached.");
-            pathIsEnded = true;
-            return;
-        }
-        pathIsEnded = false;
+            }
 
-        //find direction to next waypoint
-        Vector3 dir = (path.vectorPath[currentWaypoint] - transform.position).normalized;
-        dir *= speed * Time.fixedDeltaTime;
+            //TODO: always look at player
 
-        //decide if player is "close enough" to chase
-        //fpLocation = new Vector2(fp.transform.position.x, fp.transform.localPosition.y);
-        myLocation = new Vector2(transform.localPosition.x, transform.localPosition.y);
-        targetLocation = new Vector2(huntedPerson.transform.localPosition.x, huntedPerson.transform.localPosition.y);
-        float distanceBetween = Vector2.Distance(myLocation, targetLocation);
-        //Debug.Log(distanceBetween.ToString());
+            if (path == null) return;
 
-        //Move the AI
-        if (distanceBetween <= proximityRequiredToChase)
-        {
-            //Debug.Log("Player within range, attacc!");
-            rb.AddForce(dir, fMode);
-            
-            animator.SetFloat("vSpeed", 1);
-        }
-        else
-        {
-            animator.SetFloat("vSpeed", 0);
+            if (currentWaypoint >= path.vectorPath.Count)
+            {
+                if (pathIsEnded)
+                    return;
+                //Debug.Log("End of path reached.");
+                pathIsEnded = true;
+                return;
+            }
+            pathIsEnded = false;
+
+            //find direction to next waypoint
+            Vector3 dir = (path.vectorPath[currentWaypoint] - transform.position).normalized;
+            dir *= speed * Time.fixedDeltaTime;
+
+            //decide if player is "close enough" to chase
+            //fpLocation = new Vector2(fp.transform.position.x, fp.transform.localPosition.y);
+            myLocation = new Vector2(transform.localPosition.x, transform.localPosition.y);
+            targetLocation = new Vector2(huntedPerson.transform.localPosition.x, huntedPerson.transform.localPosition.y);
+            float distanceBetween = Vector2.Distance(myLocation, targetLocation);
+            //Debug.Log(distanceBetween.ToString());
+
+            //Move the AI
+            if (distanceBetween <= proximityRequiredToChase)
+            {
+                //Debug.Log("Player within range, attacc!");
+                rb.AddForce(dir, fMode);
+
+                animator.SetFloat("vSpeed", 1);
+            }
+            else
+            {
+                animator.SetFloat("vSpeed", 0);
+            }
+
+            //m_Character.Move(dir, false, false);
+            float dist = Vector3.Distance(transform.position, path.vectorPath[currentWaypoint]);
+            if (dist < nextWaypointDistance)
+            {
+                currentWaypoint++;
+                return;
+            }
         }
         
-        //m_Character.Move(dir, false, false);
-        float dist = Vector3.Distance(transform.position, path.vectorPath[currentWaypoint]);
-        if (dist < nextWaypointDistance)
-        {
-            currentWaypoint++;
-            return;
-        }
     }
 }
