@@ -36,13 +36,16 @@ public class SpearKoreanAI : MonoBehaviour {
     private Vector2 myLocation;
     private Vector2 targetLocation;
     private GameObject huntedPerson;
+    private Animator animator;
+    //Transform graphics;
     //private PlatformerCharacter2D m_Character;
 
     private void Start()
     {
-
+        //graphics = transform.Find("Graphics");
         seeker = GetComponent<Seeker>();
         rb = GetComponent<Rigidbody2D>();
+        animator = GetComponent<Animator>();
         //StartCoroutine(SearchForPlayer());
         huntedPerson = GameObject.FindGameObjectWithTag("Player");
         //m_Character = GetComponent<PlatformerCharacter2D>();
@@ -102,6 +105,7 @@ public class SpearKoreanAI : MonoBehaviour {
         {
             path = p;
             currentWaypoint = 0;
+            //animator.SetFloat("vSpeed", 0);
         }
     }
 
@@ -147,6 +151,12 @@ public class SpearKoreanAI : MonoBehaviour {
         {
             //Debug.Log("Player within range, attacc!");
             rb.AddForce(dir, fMode);
+            
+            animator.SetFloat("vSpeed", 1);
+        }
+        else
+        {
+            animator.SetFloat("vSpeed", 0);
         }
         
         //m_Character.Move(dir, false, false);
