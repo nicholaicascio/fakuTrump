@@ -9,6 +9,8 @@ public class MoveTrail : MonoBehaviour {
     public GameObject fp;               //the FirePoint (on the tip of the barrel, it's a child of arm which is a child of player)
     private Vector2 bulletLocation;     //store the location of the MoveTrail in space
     private Vector2 fpLocation;         //store the location of the FirePoint in space
+    public int POINT_FOR_HIT = 69;
+    public float scoreMultiplier = 1;
 
     private void Start()
     {
@@ -19,6 +21,16 @@ public class MoveTrail : MonoBehaviour {
             return;
         }
         fpLocation = new Vector2(fp.transform.position.x, fp.transform.localPosition.y); //we only need to do this once
+    }
+
+    public void setScoreMultiplier(float num)
+    {
+        this.scoreMultiplier = num;
+    }
+
+    public float getScoreMultiplier()
+    {
+        return this.scoreMultiplier;
     }
 
     public void setDamage(float num)
@@ -51,7 +63,8 @@ public class MoveTrail : MonoBehaviour {
         Enemy enemy = collision.GetComponent<Enemy>();                                          //this is the enemy hit by the Collider2D
         GameMaster.updateTotalDamage(damageDealt);                                              //
         GameMaster.updateTotalHits(1);                                                          //update the End of Game stats
-        GameMaster.updateAccuracy();                                                            //
+        GameMaster.updateAccuracy();
+        GameMaster.updateScore(POINT_FOR_HIT);
         enemy.DamageEnemy(damageDealt);                                                         //pass the damageDealt to the Enemy we hit
         Debug.Log("Bullet hit " + collision + " and dealt " + (damageDealt) + " damage.");
         Destroy(this.gameObject);                                                               //destroy the Enemy we hit. we could remove this for bullet penetration
