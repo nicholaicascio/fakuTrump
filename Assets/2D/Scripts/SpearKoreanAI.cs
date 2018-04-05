@@ -86,18 +86,24 @@ public class SpearKoreanAI : MonoBehaviour {
 
     IEnumerator UpdatePath()
     {
-        if (target == null)
+        if (!isDead)
         {
-            if (!searchingForPlayer)
+            if (target == null)
             {
-                searchingForPlayer = true;
-                StartCoroutine(SearchForPlayer());
+                if (!searchingForPlayer)
+                {
+                    searchingForPlayer = true;
+                    StartCoroutine(SearchForPlayer());
+                }
+
             }
-            
+            if (target != null)
+            {
+                seeker.StartPath(transform.position, target.position, OnPathComplete);
+                yield return new WaitForSeconds(1f / updateRate);
+                StartCoroutine(UpdatePath());
+            }
         }
-        seeker.StartPath(transform.position, target.position, OnPathComplete);
-        yield return new WaitForSeconds(1f / updateRate);
-        StartCoroutine(UpdatePath());
     }
 
     public void OnPathComplete(Path p)
