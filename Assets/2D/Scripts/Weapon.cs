@@ -8,6 +8,8 @@ public class Weapon : MonoBehaviour {
     public float fireRate = 0;
     public float weaponDamage = 40;
     public int magazineSize = 30; //the number of bullets a magazine can theoretically hold. 30 is a standard size on civilian rifles
+    public float lastShotTime = 0;
+    public bool didHit = false;
     //float damageDealt = 0;
     //public float weaponAccuracy = 1;
     //private float accuracyMin = 0;
@@ -70,7 +72,6 @@ public class Weapon : MonoBehaviour {
     void Update()
     {
         
-        
         //Shoot();
         if (fireRate == 0)
         {
@@ -102,6 +103,7 @@ public class Weapon : MonoBehaviour {
             Debug.Log("Out of Ammo.");
             return;
         }
+
         GameMaster.updateTotalShots(1);
         GameMaster.updateAccuracy();
         //Debug.Log("shoot");
@@ -124,6 +126,7 @@ public class Weapon : MonoBehaviour {
         Debug.DrawLine(firePointPosition, (mousePosition-firePointPosition)*100, Color.cyan);
         if (hit.collider != null)
         {
+            this.didHit = true;
             //GameMaster.updateTotalHits(1);
             //this.totalHits++; //Increment total number of hits.
             //damageDealt = weaponDamage / hit.distance; //Damage Drop off. 40 Could be replaced with a damage depending on which weapon you are using.
@@ -138,6 +141,11 @@ public class Weapon : MonoBehaviour {
                 //enemy.DamageEnemy(damageDealt);
             //}
         }
+        else
+        {
+            this.didHit = false; //Track that the bullet did not hit the target.
+        }
+        this.lastShotTime = Time.time; //Track the time the gun was last shot.
         //GameMaster.updateAccuracy();
         ammoCount--; //Decrement Ammo Count
         ammoCountGUI.text = "Ammo Count: " + ammoCount + " / " + ammoStash;
@@ -151,6 +159,16 @@ public class Weapon : MonoBehaviour {
         Transform bullet = Instantiate(bulletTrailPrefab, firePoint.position, firePoint.rotation);
         MoveTrail trail = bullet.GetComponent<MoveTrail>();
         trail.setDamage(weaponDamage);
+
+        if (!didHit)
+        {
+             trail.setScoreMultiplier(1); //Reset Score Multiplier.
+        }
+        else if ((Time.time - this.lastShotTime) < 1) //If the time from the last shot is less than 1 second, then add to the score multiplier.
+        {
+             trail.setScoreMultiplier(trail.getScoreMultiplier() + (Time.time - this.lastShotTime)); //Increment Score Multiplier.
+        }
+        GameMaster.updateScoreMultiplier(trail.getScoreMultiplier()); //Update the score multiplier.
 
         //bulletTrailPrefab.rotation *= rot;
 

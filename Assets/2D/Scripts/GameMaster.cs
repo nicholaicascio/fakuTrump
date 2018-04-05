@@ -28,16 +28,27 @@ public class GameMaster : MonoBehaviour {
     public float overallAccuracy = 0; //For End of Game Stats
     public float totalKills = 0; //for End of Game Stats
     public float totalDeaths = 0; //for End of Game Stats
-
+    public float scoreMultiplier = 1; //For end of Game Stats
+    public float score = 0; //For end of Game Stats
     
 
     public Text accuracyGUI;
+    public Text scoreMultiplierText;
+    public Text scoreText;
+
     private void Awake()
     {
+        scoreMultiplierText = GameObject.Find("ScoreMultiplierText").GetComponent<Text>();
+        scoreText = GameObject.Find("ScoreText").GetComponent<Text>();
         accuracyGUI = GameObject.Find("AccuracyText").GetComponent<Text>();
         if(!accuracyGUI)
         {
             Debug.LogError("Could not find a child named 'AccuracyText'!");
+        }
+
+        if (!scoreMultiplierText)
+        {
+            Debug.LogError("Could not find a child named 'ScoreMultiplierText'!");
         }
     }
 
@@ -103,5 +114,17 @@ public class GameMaster : MonoBehaviour {
     public static void updateTotalDeaths(float num)
     {
         gm.totalDeaths += num;
+    }
+
+    public static void updateScoreMultiplier(float num)
+    {
+        gm.scoreMultiplier = num;
+        gm.scoreMultiplierText.text = "Score Multiplier: " + gm.scoreMultiplier.ToString("#.##"); //Keep at two decimal places.
+    }
+
+    public static void updateScore(float num)
+    {
+        gm.score += num;
+        gm.scoreText.text = "Score: " + gm.score.ToString("#.##"); //Keep at two decimal places. Could make this an integer or show no decimal places if we want.
     }
 }
