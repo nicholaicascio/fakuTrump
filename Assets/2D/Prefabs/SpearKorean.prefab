@@ -191,6 +191,7 @@ MonoBehaviour:
   updateRate: 2
   speed: 20
   proximityRequiredToChase: 25
+  attack: 1
   fMode: 1
   pathIsEnded: 0
   isDead: 0

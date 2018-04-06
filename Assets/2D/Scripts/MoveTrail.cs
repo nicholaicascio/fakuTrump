@@ -42,9 +42,9 @@ public class MoveTrail : MonoBehaviour {
     private void Update()
     {
         //Vector3 vect = new Vector3(Random.Range(0, 100), Random.Range(0, 100), 0);
-        transform.Translate(Vector3.right * Time.deltaTime * moveSpeed);                //moves the bullet over time
-        bulletLocation = new Vector2(transform.position.x, transform.position.y);       //tracks the bullet's location for use in the damage calculation
-        Destroy(this.gameObject, 1);                                                    //self destruct after 1 second
+        transform.Translate(Vector3.right * Time.deltaTime * moveSpeed);                        //moves the bullet over time
+        bulletLocation = new Vector2(transform.position.x, transform.position.y);               //tracks the bullet's location for use in the damage calculation
+        Destroy(this.gameObject, 0.75f);                                                        //self destruct after 3/4 second
     }
 
     private void OnTriggerEnter2D(Collider2D collision)                                         //happens when the Collider2D hits something

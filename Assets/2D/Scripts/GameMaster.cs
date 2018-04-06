@@ -17,7 +17,9 @@ public class GameMaster : MonoBehaviour {
     public Transform playerPrefab;
     public Transform spawnPoint;
     public Transform spawnPrefab;
+    private bool alreadySpawning = false;
     public int spawnDelay = 2;
+    //private bool alreadySpawning = false;
     public float spawnParticleTimeOnScreen = 3f;
 
 
@@ -54,11 +56,17 @@ public class GameMaster : MonoBehaviour {
 
     public IEnumerator RespawnPlayer()
     {
+        if (!alreadySpawning) //make sure this can't happen multiple times silumltaneously
+        {
+            alreadySpawning = true;
             yield return new WaitForSeconds(spawnDelay);
             Instantiate(playerPrefab, spawnPoint.position, spawnPoint.rotation);
             Transform clone = Instantiate(spawnPrefab, spawnPoint.position, spawnPoint.rotation);
             Destroy(clone.gameObject, spawnParticleTimeOnScreen);
             //this is where you would add spawn particles or play a sound effect
+            alreadySpawning = false;
+        }
+        
     }
 
     public static void KillPlayer(Player player)

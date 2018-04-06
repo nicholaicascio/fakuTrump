@@ -22,6 +22,7 @@ public class SpearKoreanAI : MonoBehaviour {
     //the AI's speed per second
     public float speed = 300f;
     public float proximityRequiredToChase = 20;
+    public int attack = 10;
     public ForceMode2D fMode;
     [HideInInspector]
     public bool pathIsEnded = false;
@@ -115,6 +116,7 @@ public class SpearKoreanAI : MonoBehaviour {
             currentWaypoint = 0;
             //animator.SetFloat("vSpeed", 0);
         }
+
     }
 
     public void setDead()
@@ -162,15 +164,20 @@ public class SpearKoreanAI : MonoBehaviour {
             float distanceBetween = Vector2.Distance(myLocation, targetLocation);
             //Debug.Log(distanceBetween.ToString());
 
+            if(distanceBetween <= 2.5)                                  //if they are close enough they will deal damage
+            {
+                Debug.Log("Attacc!");
+                Player player = huntedPerson.GetComponent<Player>();
+                player.DamagePlayer(attack);
+            }
             //Move the AI
-            if (distanceBetween <= proximityRequiredToChase)
+            else if (distanceBetween <= proximityRequiredToChase)       //apply the force so they can move toward player
             {
                 //Debug.Log("Player within range, attacc!");
                 rb.AddForce(dir, fMode);
-
                 animator.SetFloat("vSpeed", 1);
             }
-            else
+            else                                                        //if they are too far away they will wait
             {
                 animator.SetFloat("vSpeed", 0);
             }
