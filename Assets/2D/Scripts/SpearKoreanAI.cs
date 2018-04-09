@@ -166,7 +166,7 @@ public class SpearKoreanAI : MonoBehaviour {
 
             if(distanceBetween <= 2.5)                                  //if they are close enough they will deal damage
             {
-                Debug.Log("Attacc!");
+                //Debug.Log("Attacc!");
                 Player player = huntedPerson.GetComponent<Player>();
                 player.DamagePlayer(attack);
             }
