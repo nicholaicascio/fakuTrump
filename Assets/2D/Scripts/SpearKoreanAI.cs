@@ -42,6 +42,10 @@ public class SpearKoreanAI : MonoBehaviour {
     //Transform graphics;
     //private PlatformerCharacter2D m_Character;
 
+    public AudioClip deathAudo;
+    public float deathVolume = 1.0f;
+    private bool screamed = false;
+
     private void Start()
     {
         //enemy = new Enemy();
@@ -120,6 +124,15 @@ public class SpearKoreanAI : MonoBehaviour {
 
     }
 
+    private void Update()
+    {
+        if (myself.stats.isDead && !screamed)
+        {
+            AudioSource.PlayClipAtPoint(deathAudo, new Vector3(myself.transform.position.x, myself.transform.position.y, myself.transform.position.z), deathVolume);
+            screamed = true;
+        }
+    }
+
     private void FixedUpdate()
     {
         if (!myself.stats.isDead)
@@ -159,21 +172,24 @@ public class SpearKoreanAI : MonoBehaviour {
             float distanceBetween = Vector2.Distance(myLocation, targetLocation);
             //Debug.Log(distanceBetween.ToString());
 
-            if(distanceBetween <= 2.5)                                  //if they are close enough they will deal damage
+            if(distanceBetween <= 3)                                  //if they are close enough they will deal damage
             {
                 //Debug.Log("Attacc!");
+                animator.SetBool("isAttack", true);
                 Player player = huntedPerson.GetComponent<Player>();
                 player.DamagePlayer(attack);
             }
             //Move the AI
             else if (distanceBetween <= proximityRequiredToChase)       //apply the force so they can move toward player
             {
+                animator.SetBool("isAttack", false);
                 //Debug.Log("Player within range, attacc!");
                 rb.AddForce(dir, fMode);
                 animator.SetFloat("vSpeed", 1);
             }
             else                                                        //if they are too far away they will wait
             {
+                animator.SetBool("isAttack", false);
                 animator.SetFloat("vSpeed", 0);
             }
 

@@ -41,7 +41,8 @@ public class SuicideDogAI : MonoBehaviour {
     //Transform graphics;
     //private PlatformerCharacter2D m_Character;
 
-    
+    public AudioClip explosionAudio;
+    public float explosionVolume = 1.0f;
 
     private void Start()
     {
@@ -140,6 +141,7 @@ public class SuicideDogAI : MonoBehaviour {
                 int damageDealt = attack / (Mathf.RoundToInt(distanceFromTrump));
                 player.DamagePlayer(damageDealt);
             }
+            AudioSource.PlayClipAtPoint(explosionAudio, new Vector3(myself.transform.position.x, myself.transform.position.y, myself.transform.position.z), explosionVolume);
             blewUp = true;
         }
     }

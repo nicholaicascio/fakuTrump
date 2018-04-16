@@ -55,7 +55,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1212950283485550}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 59.33, y: -0.39, z: 0}
+  m_LocalPosition: {x: 35.02, y: -0.91, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4964897521863318}
@@ -190,12 +190,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   target: {fileID: 0}
   updateRate: 2
-  speed: 20
+  speed: 25
   proximityRequiredToChase: 25
   attack: 1
   fMode: 1
   pathIsEnded: 0
   nextWaypointDistance: 3
+  deathAudo: {fileID: 8300000, guid: aa3909b1c430ee7469e244605c22b187, type: 3}
+  deathVolume: 1
 --- !u!212 &212383821090111590
 SpriteRenderer:
   m_ObjectHideFlags: 1
