@@ -134,6 +134,12 @@ public class SuicideDogAI : MonoBehaviour {
             }
             float distanceFromTrump = Vector2.Distance(myLocation, target.position);
             Debug.Log("There is " + distanceFromTrump + " between Trump and explosion!");
+            if (distanceFromTrump <= 6)
+            {
+                Player player = huntedPerson.GetComponent<Player>();
+                int damageDealt = attack / (Mathf.RoundToInt(distanceFromTrump));
+                player.DamagePlayer(damageDealt);
+            }
             blewUp = true;
         }
     }

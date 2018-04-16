@@ -22,7 +22,7 @@ GameObject:
   - component: {fileID: 251095602841727002}
   - component: {fileID: 212173124837915604}
   - component: {fileID: 61654391423916946}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: OneWayPlatform
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -36,7 +36,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1578667355052722}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 19.13, y: -2.88, z: 0}
+  m_LocalPosition: {x: 20.27, y: -2.39, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -65,7 +65,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 11.45, y: 0.625}
+  m_Size: {x: 10, y: 0.625}
   m_EdgeRadius: 0
 --- !u!212 &212173124837915604
 SpriteRenderer:

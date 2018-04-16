@@ -6,6 +6,7 @@ TagManager:
   tags:
   - GM
   - FirePoint
+  - Enemy
   layers:
   - Default
   - TransparentFX
