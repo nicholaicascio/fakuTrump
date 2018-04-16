@@ -49,7 +49,7 @@ public class MoveTrail : MonoBehaviour {
 
     private void OnTriggerEnter2D(Collider2D collision)                                         //happens when the Collider2D hits something
     {
-        float distanceBetween = Vector2.Distance(fpLocation, bulletLocation);                   //calculate how far from FirePoint to Collider2D
+        float distanceBetween = Vector2.Distance(fpLocation, bulletLocation);                   //calculate how far from FirePoint to MoveTrail
         float damageDealt = Mathf.Round(bulletDamage / distanceBetween);                        //divide damage by the distance
         if(damageDealt > bulletDamage)
         {

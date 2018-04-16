@@ -83,8 +83,19 @@ public class GameMaster : MonoBehaviour {
         enemyAnimator = enemy.GetComponent<Animator>();
         //Transform renderer = enemyRenderer.transform;
         enemyAnimator.SetBool("isDead", true);
-        SpearKoreanAI spearKorean = enemy.GetComponent<SpearKoreanAI>();
-        spearKorean.setDead();
+
+        //SpearKoreanAI spearKorean = enemy.GetComponent<SpearKoreanAI>();        
+        //if (spearKorean == null)
+        //{
+            //Debug.LogError("Not a spear korean");
+        //}
+        //else
+        //
+            //spearKorean.setDead();
+        //}
+
+        enemy.stats.isDead = true;
+
         BoxCollider2D collider = enemy.GetComponent<BoxCollider2D>();
         collider.enabled = false;
         Rigidbody2D body = enemy.GetComponent<Rigidbody2D>();

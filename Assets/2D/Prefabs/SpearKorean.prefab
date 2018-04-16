@@ -43,7 +43,7 @@ GameObject:
   - component: {fileID: 61644584938737778}
   m_Layer: 12
   m_Name: SpearKorean
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -55,7 +55,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1212950283485550}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 32.09, y: 0.38, z: 0}
+  m_LocalPosition: {x: 59.33, y: -0.39, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4964897521863318}
@@ -150,6 +150,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   stats:
     Health: 100
+    isDead: 0
 --- !u!114 &114483273783819958
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -194,7 +195,6 @@ MonoBehaviour:
   attack: 1
   fMode: 1
   pathIsEnded: 0
-  isDead: 0
   nextWaypointDistance: 3
 --- !u!212 &212383821090111590
 SpriteRenderer:

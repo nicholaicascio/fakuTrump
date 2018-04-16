@@ -26,14 +26,14 @@ public class SpearKoreanAI : MonoBehaviour {
     public ForceMode2D fMode;
     [HideInInspector]
     public bool pathIsEnded = false;
-    public bool isDead = false;
+    //public bool isDead = false;
     //the max distance from the AI to a waypoint for it to move
     public float nextWaypointDistance = 3;
     //the waypoint we are currently going toward
     private int currentWaypoint = 0;
 
     private bool searchingForPlayer = false;
-
+    private Enemy myself;
     private Vector2 myLocation;
     private Vector2 targetLocation;
     private GameObject huntedPerson;
@@ -52,6 +52,7 @@ public class SpearKoreanAI : MonoBehaviour {
         //StartCoroutine(SearchForPlayer());
         huntedPerson = GameObject.FindGameObjectWithTag("Player");
         //m_Character = GetComponent<PlatformerCharacter2D>();
+        myself = this.GetComponent<Enemy>();
 
         if (target == null)
         {
@@ -87,7 +88,7 @@ public class SpearKoreanAI : MonoBehaviour {
 
     IEnumerator UpdatePath()
     {
-        if (!isDead)
+        if (!myself.stats.isDead)
         {
             if (target == null)
             {
@@ -119,15 +120,9 @@ public class SpearKoreanAI : MonoBehaviour {
 
     }
 
-    public void setDead()
-    {
-        isDead = true;
-        return;
-    }
-
     private void FixedUpdate()
     {
-        if (!isDead)
+        if (!myself.stats.isDead)
         {
             if (target == null)
             {

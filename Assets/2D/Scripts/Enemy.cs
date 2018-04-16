@@ -11,6 +11,7 @@ public class Enemy : MonoBehaviour {
     public class EnemyStats
     {
         public float Health = 100f;
+        public bool isDead = false;
     }
 
     public EnemyStats stats = new EnemyStats();
