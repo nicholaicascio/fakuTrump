@@ -24,6 +24,7 @@ namespace UnityStandardAssets._2D
         public float jumpDelay = 1.0f; //the delay before the character's jump happens
 
         Transform playerGraphics;
+        ArmRotation rotator;
 
         //public int jumpDelay = 200;
         //public IEnumerator jumpUp()
@@ -44,6 +45,7 @@ namespace UnityStandardAssets._2D
             {
                 Debug.LogError("There is no graphics object as a child of the player");
             }
+            rotator = GetComponentInChildren<ArmRotation>();
         }
 
 
@@ -66,7 +68,7 @@ namespace UnityStandardAssets._2D
         }
 
 
-        public void Move(float move, bool crouch, bool jump)
+        public void Move(float moveH, float moveV, bool crouch, bool jump)
         {
 
             // If crouching, check to see if the character can stand up
@@ -79,7 +81,55 @@ namespace UnityStandardAssets._2D
                 }
             }
 
-            
+            if (moveH > 0 && moveV == 0)
+            {
+                //aim right
+                //Debug.Log("aim right");
+                rotator.SetRotation(0f);
+            }
+            else if(moveH > 0 && moveV > 0)
+            {
+                //aim up right
+                //Debug.Log("aim up right");
+                rotator.SetRotation(45f);
+            }
+            else if(moveH > 0 && moveV < 0)
+            {
+                //aim down right
+                //Debug.Log("aim down right");
+                rotator.SetRotation(315f);
+            }
+            else if(moveH < 0 && moveV == 0)
+            {
+                //aim left
+                //Debug.Log("aim left");
+                rotator.SetRotation(180f);
+            }
+            else if(moveH < 0 && moveV > 0)
+            {
+                //aim up left
+                //Debug.Log("aim up left");
+                rotator.SetRotation(135f);
+            }
+            else if(moveH < 0 && moveV < 0)
+            {
+                //aim down left
+                //Debug.Log("aim down left");
+                rotator.SetRotation(225f);
+            }
+            else if(moveH == 0 && moveV > 0)
+            {
+                //aim up
+                //Debug.Log("aim up");
+                rotator.SetRotation(90f);
+            }
+            else if(moveH == 0 && moveV < 0)
+            {
+                //aim down
+                //Debug.Log("aim down");
+                rotator.SetRotation(270f);
+            }
+
 
             // Set whether or not the character is crouching in the animator
             m_Anim.SetBool("Crouch", crouch);
@@ -88,22 +138,22 @@ namespace UnityStandardAssets._2D
             if (m_Grounded || m_AirControl)
             {
                 // Reduce the speed if crouching by the crouchSpeed multiplier
-                move = (crouch ? move*m_CrouchSpeed : move);
+                moveH = (crouch ? moveH * m_CrouchSpeed : moveH);
 
                 // The Speed animator parameter is set to the absolute value of the horizontal input.
-                m_Anim.SetFloat("Speed", Mathf.Abs(move));
+                m_Anim.SetFloat("Speed", Mathf.Abs(moveH));
 
                 // Move the character
-                m_Rigidbody2D.velocity = new Vector2(move*m_MaxSpeed, m_Rigidbody2D.velocity.y);
+                m_Rigidbody2D.velocity = new Vector2(moveH * m_MaxSpeed, m_Rigidbody2D.velocity.y);
 
                 // If the input is moving the player right and the player is facing left...
-                if (move > 0 && !m_FacingRight)
+                if (moveH > 0 && !m_FacingRight)
                 {
                     // ... flip the player.
                     Flip();
                 }
                     // Otherwise if the input is moving the player left and the player is facing right...
-                else if (move < 0 && m_FacingRight)
+                else if (moveH < 0 && m_FacingRight)
                 {
                     // ... flip the player.
                     Flip();

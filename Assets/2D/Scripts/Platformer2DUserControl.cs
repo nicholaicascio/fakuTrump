@@ -34,12 +34,13 @@ namespace UnityStandardAssets._2D
             bool crouch = Input.GetKey(KeyCode.S);
             //bool m_Jump = Input.GetKey(KeyCode.W);
             float h = CrossPlatformInputManager.GetAxis("Horizontal");
+            float v = CrossPlatformInputManager.GetAxis("Vertical");
             if (h != 0){
                 //Debug.Log(h.ToString());
             }
             
             // Pass all parameters to the character control script.
-            m_Character.Move(h, crouch, m_Jump);
+            m_Character.Move(h, v, crouch, m_Jump);
             m_Jump = false;
         }
     }
