@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using UnityEngine;
+using UnityStandardAssets.CrossPlatformInput;
 
 namespace UnityStandardAssets._2D
 {
@@ -21,11 +22,11 @@ namespace UnityStandardAssets._2D
         private Rigidbody2D m_Rigidbody2D;
         private bool m_FacingRight = true;  // For determining which way the player is currently facing.
 
-        public float jumpDelay = 1.0f; //the delay before the character's jump happens
+        public float jumpDelay = 1.0f;      //the delay before the character's jump happens
 
-        Transform playerGraphics;
-        ArmRotation rotator;
-
+        Transform playerGraphics;           //this is the sprite renderer child of the player
+        ArmRotation rotator;                //this is the arm rotating script
+        private bool stopMoveButt;          //check to see if player is pressing the "stop and stand in place" button
         //public int jumpDelay = 200;
         //public IEnumerator jumpUp()
         //{
@@ -51,8 +52,14 @@ namespace UnityStandardAssets._2D
 
         private void FixedUpdate()
         {
+            
             m_Grounded = false;
-
+            stopMoveButt = CrossPlatformInputManager.GetButton("Fire3"); //the button for holding in place
+            if (stopMoveButt)                                            //if pressed they will stop in their tracks
+            {
+                m_Rigidbody2D.velocity = new Vector2(0, 0);
+                m_Anim.SetFloat("Speed", 0);
+            }
             // The player is grounded if a circlecast to the groundcheck position hits anything designated as ground
             // This can be done using layers instead but Sample Assets will not overwrite your project settings.
             Collider2D[] colliders = Physics2D.OverlapCircleAll(m_GroundCheck.position, k_GroundedRadius, m_WhatIsGround);
@@ -68,7 +75,7 @@ namespace UnityStandardAssets._2D
         }
 
 
-        public void Move(float moveH, float moveV, bool crouch, bool jump)
+        public void Move(float moveH, float moveV, bool crouch, bool jump, bool hold)
         {
 
             // If crouching, check to see if the character can stand up
@@ -140,12 +147,15 @@ namespace UnityStandardAssets._2D
                 // Reduce the speed if crouching by the crouchSpeed multiplier
                 moveH = (crouch ? moveH * m_CrouchSpeed : moveH);
 
-                // The Speed animator parameter is set to the absolute value of the horizontal input.
-                m_Anim.SetFloat("Speed", Mathf.Abs(moveH));
+                
 
-                // Move the character
-                m_Rigidbody2D.velocity = new Vector2(moveH * m_MaxSpeed, m_Rigidbody2D.velocity.y);
-
+                if (!hold) //they wont move if the "hold in place" button is being pressed
+                {
+                    // The Speed animator parameter is set to the absolute value of the horizontal input.
+                    m_Anim.SetFloat("Speed", Mathf.Abs(moveH));
+                    // Move the character
+                    m_Rigidbody2D.velocity = new Vector2(moveH * m_MaxSpeed, m_Rigidbody2D.velocity.y);
+                }
                 // If the input is moving the player right and the player is facing left...
                 if (moveH > 0 && !m_FacingRight)
                 {
