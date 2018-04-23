@@ -88,49 +88,49 @@ namespace UnityStandardAssets._2D
                 }
             }
 
-            if (moveH > 0 && moveV == 0)
+            if (moveH > 0 && moveV < 0.8 && moveV > -0.8)
             {
                 //aim right
                 //Debug.Log("aim right");
                 rotator.SetRotation(0f);
             }
-            else if(moveH > 0 && moveV > 0)
+            else if(moveH > 0.8 && moveV > 0.8)
             {
                 //aim up right
                 //Debug.Log("aim up right");
                 rotator.SetRotation(45f);
             }
-            else if(moveH > 0 && moveV < 0)
+            else if(moveH > 0.8 && moveV < -0.8)
             {
                 //aim down right
                 //Debug.Log("aim down right");
                 rotator.SetRotation(315f);
             }
-            else if(moveH < 0 && moveV == 0)
+            else if(moveH < 0 && moveV > -0.8 && moveV < 0.8)
             {
                 //aim left
                 //Debug.Log("aim left");
                 rotator.SetRotation(180f);
             }
-            else if(moveH < 0 && moveV > 0)
+            else if(moveH < 0 && moveV > 0.8)
             {
                 //aim up left
                 //Debug.Log("aim up left");
                 rotator.SetRotation(135f);
             }
-            else if(moveH < 0 && moveV < 0)
+            else if(moveH < -0.8 && moveV < -0.8)
             {
                 //aim down left
                 //Debug.Log("aim down left");
                 rotator.SetRotation(225f);
             }
-            else if(moveH == 0 && moveV > 0)
+            else if(moveH < 0.8 && moveH > -0.8 && moveV > 0.8)
             {
                 //aim up
                 //Debug.Log("aim up");
                 rotator.SetRotation(90f);
             }
-            else if(moveH == 0 && moveV < 0)
+            else if(moveH < 0.8 && moveH > -0.8 && moveV < -0.8)
             {
                 //aim down
                 //Debug.Log("aim down");
