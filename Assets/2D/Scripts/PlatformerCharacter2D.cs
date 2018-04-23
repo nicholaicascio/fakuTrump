@@ -136,6 +136,11 @@ namespace UnityStandardAssets._2D
                 //Debug.Log("aim down");
                 rotator.SetRotation(270f);
             }
+            else if (moveH ==0 && moveV == 0)
+            {
+                //return to normal
+                rotator.SetRotation(0f);
+            }
 
 
             // Set whether or not the character is crouching in the animator
