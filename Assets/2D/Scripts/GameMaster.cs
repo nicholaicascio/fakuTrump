@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class GameMaster : MonoBehaviour {
     public static GameMaster gm;
@@ -72,7 +73,13 @@ public class GameMaster : MonoBehaviour {
     public static void KillPlayer(Player player)
     {
         Destroy(player.gameObject);
-        gm.StartCoroutine(gm.RespawnPlayer());
+        SceneManager.LoadScene("gameOver");
+        //gm.StartCoroutine(gm.RespawnPlayer());
+        //Camera mainCamera = Transform.FindObjectOfType<Camera>();
+        //Debug.Log(mainCamera.ToString());
+        //mainCamera.transform.position = new Vector3(0, 30, 0);
+        //mainCamera.orthographicSize = 150;
+        //mainCamera.transform.position = Vector3.Lerp(mainCamera.transform.position, )
     }
     
     public static void KillEnemy(Enemy enemy)

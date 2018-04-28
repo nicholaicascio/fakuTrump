@@ -11,7 +11,7 @@ public class FollowCam : MonoBehaviour {
     public float yMaxClamp = -1;
     public float xMinClamp = -1;
     public float xMaxClamp = -1;
-
+    public bool isAlive = true; //turn this off when we dont want the camera to be following trump
 
     float nextTimeToSearch = 0;
     //Vector3 newPos;
@@ -22,15 +22,18 @@ public class FollowCam : MonoBehaviour {
     }
     private void LateUpdate()
     {
-        if (target == null)
+        if (isAlive)
         {
-            FindPlayer();
-            return;
+            if (target == null)
+            {
+                FindPlayer();
+                return;
+            }
+            Vector3 desiredPosition = target.position + offset;
+            Vector3 smoothedPosition = Vector3.Lerp(transform.position, desiredPosition, smoothSpeed);
+            smoothedPosition = new Vector3(Mathf.Clamp(smoothedPosition.x, xMinClamp, xMaxClamp), Mathf.Clamp(smoothedPosition.y, yMinClamp, yMaxClamp), smoothedPosition.z);
+            transform.position = smoothedPosition;
         }
-        Vector3 desiredPosition = target.position + offset;
-        Vector3 smoothedPosition = Vector3.Lerp(transform.position, desiredPosition, smoothSpeed);
-        smoothedPosition = new Vector3(Mathf.Clamp(smoothedPosition.x, xMinClamp, xMaxClamp), Mathf.Clamp(smoothedPosition.y, yMinClamp, yMaxClamp), smoothedPosition.z);
-        transform.position = smoothedPosition;
     }
 
     void FindPlayer()
