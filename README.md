@@ -21,5 +21,6 @@ Unity 2018 or later
 ## Authors
 
 * **Nicholai Cascio** - *Game design* - [Portfolio](https://nicholaicasc.io)
+* **Jayden Weaver** - *Engineering* - [Github](https://github.com/jayden2013)
 * **Brennon Leman** - *Characters* - [Portfolio](https://www.brennonleman.com/)
 * **Travis Szabolcska** - *Environment* - [Portfolio](http://travisszabolcska.com/)
